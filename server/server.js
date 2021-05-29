@@ -11,16 +11,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-const authCheck = jwt({
+var authCheck = jwt({
   secret: jwks.expressJwtSecret({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: "your_jwks_uri"
+    jwksUri: 'https://dev-h8v85flx.us.auth0.com/.well-known/jwks.json'
   }),
-  // This is the identifier we set when we created the API
-  audience: 'your_audience',
-  issuer: "your_auth_domain",
+  audience: 'https://usb-hackaton.com',
+  issuer: 'https://dev-h8v85flx.us.auth0.com/',
   algorithms: ['RS256']
 });
 
@@ -34,7 +33,7 @@ app.get('/api/public-notes', (req, res) => {
   res.json(notes);
 })
 
-app.get('/api/private-notes', authCheck, (req,res) => {
+app.get('/api/private-notes', authCheck, (req, res) => {
   let notes = [
     { id: 4, note: 'Plan hiking trip', },
     { id: 5, note: 'Practice chess', },

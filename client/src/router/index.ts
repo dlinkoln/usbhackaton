@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import Home from "../views/Home.vue";
-import Callback from "../components/Callback.vue";
 import Notes from "../components/Notes.vue";
 
 Vue.use(VueRouter);
@@ -16,10 +15,6 @@ const routes: RouteConfig[] = [
     path: "/notes",
     name: "Notes",
     component: Notes,
-  },
-  {
-    path: "/callback",
-    component: Callback,
   },
 ];
 
